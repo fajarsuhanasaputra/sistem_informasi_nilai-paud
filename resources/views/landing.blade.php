@@ -1,18 +1,19 @@
 @extends('layout.source')
 @section('content')
+<title>beranda</title>
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
-
-        <h1 class="logo me-auto"><a href="index.html">PAUD Harapan</a></h1>
+        <!-- text blue class blue -->
+        <h1 class="logo me-auto"><a href="/">Paud Teratai</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
-                <li><a class="active" href="index.html">Beranda</a></li>
-                <li><a href="about.html">Tentang</a></li>
-                <li><a href="courses.html">Kontak</a></li>
+                <li><a class="active" href="#">Beranda</a></li>
+                <li><a href="about">Tentang</a></li>
+                <li><a href="contact">Kontak</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -24,36 +25,53 @@
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex justify-content-center align-items-center">
     <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
-        <h1>Learning Today,<br>Leading Tomorrow</h1>
-        <h2>We are team of talented designers making websites with Bootstrap</h2>
-        <a href="courses.html" class="btn-get-started">Get Started</a>
+        <h1>Ayo Bermain,<br>dan Belajar</h1>
+        <h2>"Pendidikan adalah senjata terkuat yang bisa kau gunakan untuk merubah dunia"</h2>
+        <a data-bs-toggle="modal" href="#masuk" class="btn-get-started">Masuk</a>
     </div>
 </section><!-- End Hero -->
 
 <main id="main">
 
-    <!-- ======= About Section ======= -->
     <section id="about" class="about">
         <div class="container" data-aos="fade-up">
 
             <div class="row">
                 <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-                    <img src="assets/landing/img/about.jpg" class="img-fluid" alt="">
+                    <img src="assets/landing/img/hero-bg.jpg" class="img-fluid" alt="">
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-                    <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+                    <h1>VISI & MISI.</h1>
                     <p class="fst-italic">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
+                    <h4>VISI.</h4>
                     </p>
                     <ul>
-                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                        <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+                        <li>
+                            <h4><i class="bi bi-check-circle"></i>
+                                Terwujudnya anak anak yang cerdas, sehat dan berakhlak mulia serta taqwa.</h4>
+                        </li>
                     </ul>
-                    <p>
-                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                    <p class="fst-italic">
+                    <h4>MISI</h4>
                     </p>
+                    <ul>
+                        <li>
+                            <h4><i class="bi bi-check-circle"></i>
+                                memberikan pengasuhan layanan pendidikan anak usia dini.</h4>
+                        </li>
+                        <li>
+                            <h4><i class="bi bi-check-circle"></i>
+                                membentuk karakter dan kepribadian serta mandiri.</h4>
+                        </li>
+                        <li>
+                            <h4><i class="bi bi-check-circle"></i>
+                                memahami diri sendiri , orang lain dan lingkungan.</h4>
+                        </li>
+                        <li>
+                            <h4><i class="bi bi-check-circle"></i>
+                                meningkatkan kesadaran dan partisipasi masyarakat terhadap pelayanan .</h4>
+                        </li>
+                    </ul>
 
                 </div>
             </div>
@@ -71,23 +89,15 @@
             <div class="row">
 
                 <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3>Mentor</h3>
+                    <h3>Alamat</h3>
                     <p>
-                        A108 Adam Street <br>
-                        New York, NY 535022<br>
-                        United States <br><br>
+                        Jl. Cilandak No.148-8 <br>
+                        Sarijadi, Kec. Sukasari<br>
+                        Kota Bandung, Jawa Barat 40151 <br><br>
                         <strong>Phone:</strong> +1 5589 55488 55<br>
                         <strong>Email:</strong> info@example.com<br>
                     </p>
                 </div>
-                <div class="col-lg-4 col-md-6 footer-newsletter">
-                    <h4>Join Our Newsletter</h4>
-                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                    <form action="" method="post">
-                        <input type="email" name="email"><input type="submit" value="Subscribe">
-                    </form>
-                </div>
-
             </div>
         </div>
     </div>
@@ -96,14 +106,14 @@
 
         <div class="me-md-auto text-center text-md-start">
             <div class="copyright">
-                &copy; Copyright <strong><span>Mentor</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>PaudTeratai</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
                 <!-- You can delete the links only if you purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
             </div>
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">
