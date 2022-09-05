@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +32,9 @@ Route::group(['prefix' => 'dashboard'], function() {
     Route::get('/users', [Dashboard::class, 'users'])->name('users');
     Route::post('/users', [Dashboard::class, 'add_account'])->name('users.add');
     Route::delete('/users/{biodata_id}', [Dashboard::class, 'remove_account'])->name('users.remove');
+});
+
+Route::group(['prefix' => 'auth'], function() {
+    Route::post('login', [AuthController::class, 'login'])->name('login.action');
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout.action');
 });

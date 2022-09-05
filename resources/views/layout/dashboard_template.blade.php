@@ -83,12 +83,15 @@
                     </div>
                 </div>
                 <ul class="navbar-nav justify-content-end">
-                    <li class="nav-item d-flex align-items-center">
-                        <a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
-                            <i class="fa fa-light fa-right-from-bracket"></i>
-
-                            <span class="d-sm-inline d-none">Keluar</span>
-                        </a>
+                    <li class="nav-item d-flex align-items-center mt-3">
+                        <form action="{{ route('logout.action') }}" method="POST">
+                            @csrf
+                            <button class="btn btn-warning" type="submit"
+                                class="nav-link text-body font-weight-bold px-0">
+                                <i class="fa fa-light fa-right-from-bracket"></i>
+                                <span class="d-sm-inline d-none">Keluar</span>
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </div>
