@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('biodata', function (Blueprint $table) {
+        Schema::create('biodata', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->index('user_id');
@@ -38,6 +38,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('biodata');
+        Schema::table('biodata', function (Blueprint $table) {
+            //
+        });
     }
 };
