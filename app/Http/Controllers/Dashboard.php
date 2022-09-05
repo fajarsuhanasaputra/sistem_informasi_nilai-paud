@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Users;
 use App\Models\Biodata;
 use Hash;
+use Carbon\Carbon;
 
 class Dashboard extends Controller
 {
@@ -38,7 +40,7 @@ class Dashboard extends Controller
             'role' => $request->role,
         ]);
 
-        $potoUrl = $request->poto ? $request->poto->store('images') : '';
+        $potoUrl = $request->poto ? $this->save_photo($request) : '';
 
         $biodata = Biodata::create([
             'user_id' => $user->id,
@@ -54,5 +56,31 @@ class Dashboard extends Controller
         ]);
 
         return redirect('dashboard/users')->with('success', 'Berhasil membuat akun baru!');
+    }
+    
+    public function remove_account(Request $request, $biodata_id) {
+        $biodata = Biodata::find($biodata_id);
+        $photo = $biodata->poto;
+        $removed = $this->remove_photo($photo);
+    }
+
+    private function save_photo($request) {
+        $date = Carbon::now()->format('H:i:m');
+        $str = $this->quickRandom();
+        $ext = $request->poto->extension();
+        $name = $str.'-'.$date.'.'.$ext;
+        $request->poto->storeAs('images', $name);
+
+        return $name;
+    }
+
+    private function remove_photo($photo) {
+        return Storage::disk('images')->delete($photo);
+    }
+
+    public static function quickRandom($length = 8) {
+        $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
     }
 }

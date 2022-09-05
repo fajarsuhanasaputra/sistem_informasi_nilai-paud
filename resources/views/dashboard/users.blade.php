@@ -170,7 +170,7 @@
                         <td>
                             <div class="d-flex px-2">
                                 <div>
-                                    <img src="{{ asset('storage/'.$user->poto) }}"
+                                    <img src="{{ asset('storage/images/'.$user->poto) }}"
                                         class="avatar avatar-sm rounded-circle me-2" alt="profile-user">
                                 </div>
                                 <div class="my-auto">
