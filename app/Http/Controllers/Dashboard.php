@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Users;
+use App\Models\Biodata;
 
 class Dashboard extends Controller
 {
@@ -11,6 +13,10 @@ class Dashboard extends Controller
     }
 
     public function users() {
-        return view('dashboard.users');
+        $users = Biodata::join('users', 'users.id', '=', 'biodata.user_id')
+            ->select('users.nama', 'users.username', 'users.role')
+            ->paginate(10);
+
+        return view('dashboard.users', ['users' => $users]);
     }
 }
