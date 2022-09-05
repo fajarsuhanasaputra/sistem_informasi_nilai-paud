@@ -5,16 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Guru extends Model
+class Biodata extends Model
 {
     use HasFactory;
+    protected $table = 'biodata';
     protected $fillable = [
-        'username',
-        'password',
+        'user_id',
         'nip',
-        'nama_guru',
+        'nisn',
+        'nama',
+        'tempat_lahir',
+        'tanggal_lahir',
         'jenis_kelamin',
-        'telepon',
+        'poto',
+        'agama',
+        'kelas',
         'alamat',
     ];
 }
