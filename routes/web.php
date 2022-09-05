@@ -18,23 +18,29 @@ use App\Http\Controllers\AuthController;
 Route::group(['prefix' => '/'], function() {
     Route::get('/', function () {
         return view('landing');
-    });
+    })->name('landing');
     Route::get('/about', function () {
         return view('about');
     });
     Route::get('/contact', function () {
         return view('contact');
     });
+    Route::get('/signin', function () {
+        if (Auth::check()) {
+            return redirect('dashboard');
+        }
+        return view('login');
+    })->name('login');
 });
 
-Route::group(['prefix' => 'dashboard'], function() {
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
     Route::get('/', [Dashboard::class, 'index'])->name('dashboard');
     Route::get('/users', [Dashboard::class, 'users'])->name('users');
-    Route::post('/users', [Dashboard::class, 'add_account'])->name('users.add');
-    Route::delete('/users/{biodata_id}', [Dashboard::class, 'remove_account'])->name('users.remove');
+    Route::post('/users', [Dashboard::class, 'add_account'])->name('users.add')->middleware('checkRole:admin');
+    Route::delete('/users/{biodata_id}', [Dashboard::class, 'remove_account'])->name('users.remove')->middleware('checkRole:admin');
 });
 
 Route::group(['prefix' => 'auth'], function() {
     Route::post('login', [AuthController::class, 'login'])->name('login.action');
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout.action');
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout.action')->middleware('checkRole:admin,guru,siswa');
 });
