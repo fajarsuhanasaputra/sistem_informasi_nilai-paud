@@ -20,11 +20,11 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('nip')->unique()->nullable();
             $table->integer('nisn')->unique()->nullable();
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->enum('jenis_kelamin', ['p', 'l'])->nullable();
             $table->string('poto')->nullable();
-            $table->string('agama');
+            $table->string('agama')->nullable();
             $table->string('kelas')->nullable();
             $table->text('alamat')->nullable();
             $table->timestamps();

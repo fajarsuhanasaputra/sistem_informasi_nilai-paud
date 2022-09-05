@@ -8,7 +8,8 @@
         </div>
     </div>
     <div class="card-body px-4 pb-2">
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('users.add') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="row">
                 <h6>Akun</h6>
                 <div class="col-md-6">
@@ -33,7 +34,8 @@
                     <div class="input-group input-group-static mb-4">
                         <label for="role" class="ms-0">Role</label>
                         <select name="role" class="form-control" id="role" required>
-                            <option selected value="siswa">Siswa</option>
+                            <option value="">Pilih role akun</option>
+                            <option value="siswa">Siswa</option>
                             <option value="guru">Guru</option>
                             <option value="admin">Admin</option>
                         </select>
@@ -93,7 +95,8 @@
                     <div class="input-group input-group-static mb-4">
                         <label for="agama" class="ms-0">Agama</label>
                         <select name="agama" class="form-control" id="agama">
-                            <option selected value="islam">Islam</option>
+                            <option value="">Pilih agama</option>
+                            <option value="islam">Islam</option>
                             <option value="kristen">Kristen</option>
                             <option value="budha">Budha</option>
                             <option value="Hindu">Hindu</option>
@@ -105,7 +108,8 @@
                     <div class="input-group input-group-static mb-4">
                         <label for="kelas" class="ms-0">Kelas</label>
                         <select name="kelas" class="form-control" id="kelas">
-                            <option selected value="A">Kelas A</option>
+                            <option value="">Pilih kelas</option>
+                            <option value="A">Kelas A</option>
                             <option value="B">Kelas B</option>
                         </select>
                     </div>
@@ -114,7 +118,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="input-group input-group-dynamic">
-                        <textarea class="form-control" rows="5" placeholder="Alamat" spellcheck="false"></textarea>
+                        <textarea name="alamat" class="form-control" rows="5" placeholder="Alamat"
+                            spellcheck="false"></textarea>
                     </div>
                 </div>
             </div>
@@ -165,7 +170,7 @@
                         <td>
                             <div class="d-flex px-2">
                                 <div>
-                                    <img src="{{ asset('storage/images/'.$user->poto) }}"
+                                    <img src="{{ asset('storage/'.$user->poto) }}"
                                         class="avatar avatar-sm rounded-circle me-2" alt="profile-user">
                                 </div>
                                 <div class="my-auto">
@@ -180,33 +185,39 @@
                             <span class="text-xs font-weight-bold">{{ $user->role }}</span>
                         </td>
                         <td>
-                            <span class="text-xs font-weight-bold">{{ $user->nisn }}</span>
+                            <span class="text-xs font-weight-bold">{{ $user->nisn ? $user->nisn : '-' }}</span>
                         </td>
                         <td>
-                            <span class="text-xs font-weight-bold">{{ $user->nip }}</span>
+                            <span class="text-xs font-weight-bold">{{ $user->nip ? $user->nip : '-' }}</span>
                         </td>
                         <td>
-                            <span class="text-xs font-weight-bold">{{ $user->tempat_lahir }}</span>
+                            <span
+                                class="text-xs font-weight-bold">{{ $user->tempat_lahir ? $user->tempat_lahir : '-' }}</span>
                         </td>
                         <td>
-                            <span class="text-xs font-weight-bold">{{ $user->tanggal_lahir }}</span>
+                            <span
+                                class="text-xs font-weight-bold">{{ $user->tanggal_lahir ? $user->tanggal_lahir : '-' }}</span>
                         </td>
                         <td>
-                            <span class="text-xs font-weight-bold">{{ $user->jenis_kelamin }}</span>
+                            <span
+                                class="text-xs font-weight-bold">{{ $user->jenis_kelamin ? strtoupper($user->jenis_kelamin) : '-' }}</span>
                         </td>
                         <td>
-                            <span class="text-xs font-weight-bold">{{ $user->agama }}</span>
+                            <span class="text-xs font-weight-bold">{{ $user->agama ? $user->agama : '-' }}</span>
                         </td>
                         <td>
-                            <span class="text-xs font-weight-bold">{{ $user->kelas }}</span>
+                            <span class="text-xs font-weight-bold">{{ $user->kelas ? $user->kelas : '-' }}</span>
                         </td>
                         <td>
-                            <span class="text-xs font-weight-bold">{{ $user->alamat }}</span>
+                            <span class="text-xs font-weight-bold">{{ $user->alamat ? $user->alamat : '-' }}</span>
                         </td>
                         <td class="align-middle">
-                            <button class="btn btn-link text-secondary mb-0">
-                                <i class="fa fa-ellipsis-v text-xs"></i>
-                            </button>
+                            <a href="" class="btn btn-link text-secondary mb-0">
+                                Edit
+                            </a>
+                            <a href="" class="btn btn-link text-primary mb-0">
+                                Hapus
+                            </a>
                         </td>
                     </tr>
                     @endforeach
