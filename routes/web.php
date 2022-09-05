@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landing');
+Route::group(['prefix' => '/'], function() {
+    Route::get('/', function () {
+        return view('landing');
+    });
+    Route::get('/about', function () {
+        return view('about');
+    });
+    Route::get('/contact', function () {
+        return view('contact');
+    });
 });
-Route::get('/about', function () {
-    return view('about');
-});
-Route::get('/contact', function () {
-    return view('contact');
+
+Route::group(['prefix' => 'dashboard'], function() {
+    Route::get('/', [Dashboard::class, 'index'])->name('dashboard');
 });
