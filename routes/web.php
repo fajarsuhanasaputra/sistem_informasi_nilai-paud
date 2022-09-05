@@ -30,4 +30,5 @@ Route::group(['prefix' => 'dashboard'], function() {
     Route::get('/', [Dashboard::class, 'index'])->name('dashboard');
     Route::get('/users', [Dashboard::class, 'users'])->name('users');
     Route::post('/users', [Dashboard::class, 'add_account'])->name('users.add');
+    Route::delete('/users/{biodata_id}', [Dashboard::class, 'remove_account'])->name('users.remove');
 });

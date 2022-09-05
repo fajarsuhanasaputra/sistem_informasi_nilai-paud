@@ -211,13 +211,17 @@
                         <td>
                             <span class="text-xs font-weight-bold">{{ $user->alamat ? $user->alamat : '-' }}</span>
                         </td>
-                        <td class="align-middle">
+                        <td class="align-middle d-flex">
                             <a href="" class="btn btn-link text-secondary mb-0">
                                 Edit
                             </a>
-                            <a href="" class="btn btn-link text-primary mb-0">
-                                Hapus
-                            </a>
+                            <form action="{{ url('dashboard/users/'.$user->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-link text-primary mb-0">
+                                    Hapus
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

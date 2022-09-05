@@ -62,6 +62,11 @@ class Dashboard extends Controller
         $biodata = Biodata::find($biodata_id);
         $photo = $biodata->poto;
         $removed = $this->remove_photo($photo);
+
+        if($removed) {
+            Biodata::find($biodata_id)->delete();
+            return redirect('dashboard/users')->with('succces', 'Berhasil menghapus akun baru!');
+        }
     }
 
     private function save_photo($request) {
@@ -75,10 +80,15 @@ class Dashboard extends Controller
     }
 
     private function remove_photo($photo) {
-        return Storage::disk('images')->delete($photo);
+        if(Storage::exists('images/'.$photo)){
+            Storage::delete('images/'.$photo);
+            return true;
+        }else{
+            return false;
+        }
     }
 
-    public static function quickRandom($length = 8) {
+    public static function quickRandom($length = 12) {
         $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
