@@ -8,32 +8,34 @@
         </div>
     </div>
     <div class="card-body px-4 pb-2">
-        <form action="{{ route('users.add') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url('dashboard/users/'.$user->user_id.'/'.$user->id) }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="row">
                 <h6>Akun</h6>
                 <div class="col-md-6">
                     <label class="form-label">Username</label>
                     <div class="input-group input-group-outline my-3">
-                        <input value="{{ $user->username }}" name="username" type="text" class="form-control" required>
+                        <input value="{{ $user->username }}" name="username" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Password</label>
                     <div class="input-group input-group-outline my-3">
-                        <input name="password" type="password" class="form-control" required>
+                        <input name="password" type="password" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Nama Lengkap</label>
                     <div class="input-group input-group-outline my-3">
-                        <input value="{{ $user->nama }}" name="nama" type="text" class="form-control" required>
+                        <input value="{{ $user->nama }}" name="nama" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="input-group input-group-static mb-4">
                         <label for="role" class="ms-0">Role</label>
-                        <select name="role" class="form-control" id="role" required>
+                        <select name="role" class="form-control" id="role">
                             @if($user->role === 'admin')
                             <option value="">Pilih role akun</option>
                             <option value="siswa">Siswa</option>

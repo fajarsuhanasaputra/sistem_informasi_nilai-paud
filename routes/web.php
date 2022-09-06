@@ -38,6 +38,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
     Route::get('/users', [Dashboard::class, 'users'])->name('users');
     Route::post('/users', [Dashboard::class, 'add_account'])->name('users.add')->middleware('checkRole:admin');
     Route::get('/users/{biodata_id}', [Dashboard::class, 'usersEdit'])->name('usersEdit')->middleware('checkRole:admin');
+    Route::put('/users/{user_id}/{biodata_id}', [Dashboard::class, 'userEdit_action'])->name('userEdit_action')->middleware('checkRole:admin');
     Route::delete('/users/{biodata_id}', [Dashboard::class, 'remove_account'])->name('users.remove')->middleware('checkRole:admin');
 });
 

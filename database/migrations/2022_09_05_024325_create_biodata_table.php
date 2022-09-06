@@ -18,15 +18,15 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->index('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
-            $table->integer('nip')->unique()->nullable();
-            $table->integer('nisn')->unique()->nullable();
-            $table->string('tempat_lahir')->nullable();
-            $table->date('tanggal_lahir')->nullable();
-            $table->enum('jenis_kelamin', ['p', 'l'])->nullable();
-            $table->string('poto')->nullable();
-            $table->string('agama')->nullable();
-            $table->string('kelas')->nullable();
-            $table->text('alamat')->nullable();
+            $table->integer('nip')->unique()->nullable()->default(null);
+            $table->integer('nisn')->unique()->nullable()->default(null);
+            $table->string('tempat_lahir')->nullable()->default(null);
+            $table->date('tanggal_lahir')->nullable()->default(null);
+            $table->enum('jenis_kelamin', ['p', 'l'])->nullable()->default(null);
+            $table->string('poto')->nullable()->default(null);
+            $table->string('agama')->nullable()->default(null);
+            $table->string('kelas')->nullable()->default(null);
+            $table->text('alamat')->nullable()->default(null);
             $table->timestamps();
         });
     }

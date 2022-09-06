@@ -69,7 +69,7 @@ class Dashboard extends Controller
         }
     }
 
-    private function save_photo($request) {
+    public function save_photo($request) {
         $date = Carbon::now()->format('H:i:m');
         $str = $this->quickRandom();
         $ext = $request->poto->extension();
@@ -79,7 +79,7 @@ class Dashboard extends Controller
         return $name;
     }
 
-    private function remove_photo($photo) {
+    public function remove_photo($photo) {
         if(Storage::exists('images/'.$photo)){
             Storage::delete('images/'.$photo);
             return true;
@@ -101,5 +101,38 @@ class Dashboard extends Controller
             ->get();
 
         return view('dashboard.users_edit', ['user' => $user[0]]);
+    }
+
+    public function userEdit_action(Request $request, $user_id, $biodata_id) {
+        $user = User::find($user_id);
+        $biodata = Biodata::find($user_id);
+
+        if($request->password && $request->password !== '') {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->username = $request->username;
+        $user->nama = $request->nama;
+        $user->role = $request->role;
+        $user->update();
+
+        if($request->has('poto')) {
+            if($this->remove_photo($biodata->poto)){
+                $newPhoto = $this->save_photo($request);
+                $biodata->poto = $newPhoto;
+            }
+        }
+
+        $biodata->nip = $request->nip;
+        $biodata->nisn = $request->nisn;
+        $biodata->tempat_lahir = $request->tempat_lahir;
+        $biodata->tanggal_lahir = $request->tanggal_lahir;
+        $biodata->jenis_kelamin = $request->jenis_kelamin;
+        $biodata->agama = $request->agama;
+        $biodata->kelas = $request->kelas;
+        $biodata->alamat = $request->alamat;
+        $biodata->update();
+
+        return redirect('dashboard/users')->with('success', 'Berhasil memperbaharui akun!');
     }
 }
