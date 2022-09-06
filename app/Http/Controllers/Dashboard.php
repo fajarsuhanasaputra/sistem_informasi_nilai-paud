@@ -184,7 +184,7 @@ class Dashboard extends Controller
     public function poin_penilaian() {
         $aspeks = Aspek::all();
         $poins = PoinAspek::join('aspek', 'aspek.id', '=', 'poin_aspek.aspek_id')
-            ->select('poin_aspek.*', 'aspek.*')
+            ->select('poin_aspek.*', 'aspek.nama_aspek', 'aspek.kode')
             ->paginate(5);
         return view('dashboard.poin_penilaian', [
             'aspeks' => $aspeks,
@@ -207,7 +207,12 @@ class Dashboard extends Controller
 
     public function edit_view_poin_penilaian($poin_id) {
         $poin = PoinAspek::find($poin_id);
-        return view('dashboard.poin_penilaian_edit', ['poin' => $poin]);
+        $aspeks = Aspek::all();
+
+        return view('dashboard.poin_penilaian_edit', [
+            'poin' => $poin,
+            'aspeks' => $aspeks
+        ]);
     }
 
     public function edit_action_poin_penilaian(Request $request, $poin_id) {

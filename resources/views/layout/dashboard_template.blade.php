@@ -50,7 +50,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white {{ Route::currentRouteName() === 'points' ? 'active bg-gradient-primary' : '' }}"
+                <a class="nav-link text-white {{ Route::currentRouteName() === 'poin_penilaian' ? 'active bg-gradient-primary' : '' }}"
                     href="/dashboard/poin-penilaian">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">account_circle</i>

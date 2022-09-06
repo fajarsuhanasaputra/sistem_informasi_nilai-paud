@@ -4,7 +4,7 @@
 <div class="card my-5">
     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-            <h6 class="text-white text-capitalize ps-3">Aspek</h6>
+            <h6 class="text-white text-capitalize ps-3">Poin Penilaian</h6>
         </div>
     </div>
     <div class="card-body px-2 pb-2">
@@ -36,10 +36,11 @@
                         </td>
                         <td class="align-middle d-flex">
                             @if(Auth::user()->role === 'admin' || Auth::user()->role === 'guru')
-                            <a href="" class="btn btn-link text-secondary mb-0">
+                            <a href="{{ url('dashboard/poin-penilaian/'.$poin->id) }}"
+                                class="btn btn-link text-secondary mb-0">
                                 Edit
                             </a>
-                            <form action="" method="POST">
+                            <form action="{{ url('dashboard/poin-penilaian/'.$poin->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-link text-primary mb-0">
@@ -63,7 +64,7 @@
 <div class="card my-5">
     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-            <h6 class="text-white text-capitalize ps-3">Form Tambah Aspek</h6>
+            <h6 class="text-white text-capitalize ps-3">Form Tambah Poin Penilaian</h6>
         </div>
     </div>
     <div class="card-body px-4 pb-2">
@@ -78,7 +79,7 @@
                             <option value="">Pilih Aspek</option>
                             @if(count($aspeks) > 0)
                             @foreach($aspeks as $aspek)
-                            <option value="{{ $aspek->id }}">{{ $aspek->nama_aspek }}</option>
+                            <option value="{{$aspek->id}}">{{$aspek->nama_aspek}}</option>
                             @endforeach
                             @endif
                         </select>
