@@ -60,11 +60,13 @@ class Dashboard extends Controller
     
     public function remove_account(Request $request, $biodata_id) {
         $biodata = Biodata::find($biodata_id);
+        $user_id = $biodata->user_id;
         $photo = $biodata->poto;
         $removed = $this->remove_photo($photo);
 
         if($removed) {
             Biodata::find($biodata_id)->delete();
+            user::find($user_id)->delete();
             return redirect('dashboard/users')->with('succces', 'Berhasil menghapus akun baru!');
         }
     }
