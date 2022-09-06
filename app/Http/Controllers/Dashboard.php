@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Users;
+use App\Models\User;
 use App\Models\Biodata;
 use Hash;
 use Carbon\Carbon;
@@ -33,7 +33,7 @@ class Dashboard extends Controller
             'poto' => 'image|mimes:jpg,png,jpeg'
         ]);
 
-        $user = Users::create([
+        $user = User::create([
             'username' => $request->username,
             'password' => Hash::make($request->password),
             'nama' => $request->nama,
