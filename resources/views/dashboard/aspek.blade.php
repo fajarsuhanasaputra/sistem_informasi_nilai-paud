@@ -31,7 +31,7 @@
                         </td>
                         <td class="align-middle d-flex">
                             @if(Auth::user()->role === 'admin' || Auth::user()->role === 'guru')
-                            <a href="" class="btn btn-link text-secondary mb-0">
+                            <a href="{{ url('dashboard/aspek/'.$aspek->id) }}" class="btn btn-link text-secondary mb-0">
                                 Edit
                             </a>
                             <form action="{{ url('dashboard/aspek/'.$aspek->id) }}" method="POST">

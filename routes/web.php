@@ -44,6 +44,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
     Route::get('/aspek', [Dashboard::class, 'aspek'])->name('aspek')->middleware('checkRole:admin,guru');
     Route::post('/aspek', [Dashboard::class, 'aspek_add'])->name('aspek.add')->middleware('checkRole:admin,guru');
     Route::delete('/aspek/{aspek_id}', [Dashboard::class, 'remove_aspek'])->name('aspek.remove')->middleware('checkRole:admin,guru');
+
+    Route::get('/aspek/{aspek_id}', [Dashboard::class, 'aspekEdit_view'])->name('aspekEdit')->middleware('checkRole:admin,guru');
+    Route::put('/aspek/{aspek_id}', [Dashboard::class, 'aspekEdit_action'])->name('aspekEdit_action')->middleware('checkRole:admin,guru');
 });
 
 Route::group(['prefix' => 'auth'], function() {

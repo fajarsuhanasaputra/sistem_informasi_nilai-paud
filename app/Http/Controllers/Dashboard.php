@@ -166,4 +166,18 @@ class Dashboard extends Controller
 
         return redirect('dashboard/aspek')->with('success', 'Berhasil menghapus data aspek!');
     }
+
+    public function aspekEdit_view($aspek_id) {
+        $aspek = Aspek::find($aspek_id);
+        return view('dashboard.aspek_edit', ['aspek' => $aspek]);
+    }
+
+    public function aspekEdit_action(Request $request, $aspek_id) {
+        $aspek = Aspek::find($aspek_id);
+        $aspek->nama_aspek = $request->nama_aspek;
+        $aspek->kode = $request->kode;
+        $aspek->update();
+
+        return redirect('dashboard/aspek')->with('success', 'Berhasil memperbaharui data aspek!');
+    }
 }
