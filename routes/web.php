@@ -40,6 +40,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
     Route::get('/users/{biodata_id}', [Dashboard::class, 'usersEdit'])->name('usersEdit')->middleware('checkRole:admin');
     Route::put('/users/{user_id}/{biodata_id}', [Dashboard::class, 'userEdit_action'])->name('userEdit_action')->middleware('checkRole:admin');
     Route::delete('/users/{biodata_id}', [Dashboard::class, 'remove_account'])->name('users.remove')->middleware('checkRole:admin');
+
+    Route::get('/aspek', [Dashboard::class, 'aspek'])->name('aspek')->middleware('checkRole:admin,guru');
 });
 
 Route::group(['prefix' => 'auth'], function() {

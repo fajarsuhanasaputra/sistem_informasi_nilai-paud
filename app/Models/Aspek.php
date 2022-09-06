@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Aspek extends Model
 {
     use HasFactory;
-    use HasFactory;
     protected $table = 'aspek';
     protected $fillable = [
         'nama_aspek',

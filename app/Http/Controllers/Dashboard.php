@@ -137,4 +137,8 @@ class Dashboard extends Controller
 
         return redirect('dashboard/users')->with('success', 'Berhasil memperbaharui akun!');
     }
+
+    public function aspek() {
+        return view('dashboard.aspek');
+    }
 }
