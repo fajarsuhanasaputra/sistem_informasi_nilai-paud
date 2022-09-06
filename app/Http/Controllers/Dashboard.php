@@ -95,11 +95,11 @@ class Dashboard extends Controller
     }
 
     public function usersEdit($biodata_id) {
-        $user = Biodata::find($biodata_id)
-            ->join('users', 'users.id', '=', 'biodata.user_id')
+        $user = Biodata::join('users', 'users.id', '=', 'biodata.user_id')
             ->select('users.*', 'biodata.*')
+            ->where('biodata.id', '=', $biodata_id)
             ->get();
-            
-        return view('dashboard.users_edit', ['user', $user]);
+
+        return view('dashboard.users_edit', ['user' => $user[0]]);
     }
 }
