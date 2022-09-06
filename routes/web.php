@@ -42,6 +42,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
     Route::delete('/users/{biodata_id}', [Dashboard::class, 'remove_account'])->name('users.remove')->middleware('checkRole:admin');
 
     Route::get('/aspek', [Dashboard::class, 'aspek'])->name('aspek')->middleware('checkRole:admin,guru');
+    Route::post('/aspek', [Dashboard::class, 'aspek_add'])->name('aspek.add')->middleware('checkRole:admin,guru');
 });
 
 Route::group(['prefix' => 'auth'], function() {

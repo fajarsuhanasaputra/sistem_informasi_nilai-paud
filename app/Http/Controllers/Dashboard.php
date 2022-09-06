@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Biodata;
+use App\Models\Aspek;
+use App\Models\PoinAspek;
 use Hash;
 use Carbon\Carbon;
 
@@ -139,6 +141,22 @@ class Dashboard extends Controller
     }
 
     public function aspek() {
-        return view('dashboard.aspek');
+        $aspeks = Aspek::paginate(5);
+
+        return view('dashboard.aspek', ['aspeks' => $aspeks]);
+    }
+
+    public function aspek_add(Request $request) {
+        $request->validate([
+            'nama_aspek',
+            'kode',
+        ]);
+
+        $aspek = Aspek::create([
+            'nama_aspek' => $request->nama_aspek,
+            'kode' => $request->kode,
+        ]);
+
+        return redirect('dashboard/aspek')->with('success', 'Berhasil menambahkan data aspek!');
     }
 }

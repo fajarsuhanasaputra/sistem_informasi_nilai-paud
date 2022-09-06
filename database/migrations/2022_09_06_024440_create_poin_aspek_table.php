@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('aspek_id');
             $table->index('aspek_id');
             $table->foreign('aspek_id')->references('id')->on('aspek')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
