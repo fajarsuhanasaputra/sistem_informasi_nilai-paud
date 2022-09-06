@@ -15,14 +15,13 @@
                 <div class="col-md-6">
                     <label class="form-label">Nama Aspek</label>
                     <div class="input-group input-group-outline my-3">
-                        <input value="{{ $aspek->nama_aspek }}" name="nama_aspek" type="text" class="form-control"
-                            required>
+                        <input value="{{ $aspek->nama_aspek }}" name="nama_aspek" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Kode Aspek</label>
                     <div class="input-group input-group-outline my-3">
-                        <input value="{{ $aspek->kode }}" name="kode" type="text" class="form-control" required>
+                        <input value="{{ $aspek->kode }}" name="kode" type="text" class="form-control">
                     </div>
                 </div>
             </div>

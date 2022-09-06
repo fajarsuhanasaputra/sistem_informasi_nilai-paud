@@ -180,4 +180,46 @@ class Dashboard extends Controller
 
         return redirect('dashboard/aspek')->with('success', 'Berhasil memperbaharui data aspek!');
     }
+
+    public function poin_penilaian() {
+        $aspeks = Aspek::all();
+        $poins = PoinAspek::join('aspek', 'aspek.id', '=', 'poin_aspek.aspek_id')
+            ->select('poin_aspek.*', 'aspek.*')
+            ->paginate(5);
+        return view('dashboard.poin_penilaian', [
+            'aspeks' => $aspeks,
+            'poins' => $poins
+        ]);
+    }
+
+    public function add_poin_penilaian(Request $request) {
+        $request->validate([
+            'nama_poin',
+            'aspek_id',
+        ]);
+
+        PoinAspek::create([
+            'nama_poin' => $request->nama_poin,
+            'aspek_id' => $request->aspek_id,
+        ]);
+        return redirect('dashboard/poin-penilaian')->with('success', 'Berhasil menambahkan data poin penilaian!');
+    }
+
+    public function edit_view_poin_penilaian($poin_id) {
+        $poin = PoinAspek::find($poin_id);
+        return view('dashboard.poin_penilaian_edit', ['poin' => $poin]);
+    }
+
+    public function edit_action_poin_penilaian(Request $request, $poin_id) {
+        $poin = PoinAspek::find($poin_id);
+        $poin->nama_poin = $request->nama_poin;
+        $poin->aspek_id = $request->aspek_id;
+        $poin->update();
+        return redirect('dashboard/poin-penilaian')->with('success', 'Berhasil memperbaharui data poin penilaian!');
+    }
+
+    public function remove_poin_penilaian($poin_id) {
+        PoinAspek::find($poin_id)->delete();
+        return redirect('dashboard/poin-penilaian')->with('success', 'Berhasil menghapus data poin penilaian!');
+    }
 }
