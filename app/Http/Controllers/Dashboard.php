@@ -93,4 +93,13 @@ class Dashboard extends Controller
 
         return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
     }
+
+    public function usersEdit($biodata_id) {
+        $user = Biodata::find($biodata_id)
+            ->join('users', 'users.id', '=', 'biodata.user_id')
+            ->select('users.*', 'biodata.*')
+            ->get();
+            
+        return view('dashboard.users_edit', ['user', $user]);
+    }
 }
