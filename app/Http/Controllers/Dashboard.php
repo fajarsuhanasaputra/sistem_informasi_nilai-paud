@@ -159,4 +159,11 @@ class Dashboard extends Controller
 
         return redirect('dashboard/aspek')->with('success', 'Berhasil menambahkan data aspek!');
     }
+
+    public function remove_aspek($aspek_id) {
+        PoinAspek::where('aspek_id', '=', $aspek_id)->delete();
+        Aspek::find($aspek_id)->delete();
+
+        return redirect('dashboard/aspek')->with('success', 'Berhasil menghapus data aspek!');
+    }
 }

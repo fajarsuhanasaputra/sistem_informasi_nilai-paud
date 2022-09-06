@@ -34,7 +34,7 @@
                             <a href="" class="btn btn-link text-secondary mb-0">
                                 Edit
                             </a>
-                            <form action="" method="POST">
+                            <form action="{{ url('dashboard/aspek/'.$aspek->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-link text-primary mb-0">

@@ -43,6 +43,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
 
     Route::get('/aspek', [Dashboard::class, 'aspek'])->name('aspek')->middleware('checkRole:admin,guru');
     Route::post('/aspek', [Dashboard::class, 'aspek_add'])->name('aspek.add')->middleware('checkRole:admin,guru');
+    Route::delete('/aspek/{aspek_id}', [Dashboard::class, 'remove_aspek'])->name('aspek.remove')->middleware('checkRole:admin,guru');
 });
 
 Route::group(['prefix' => 'auth'], function() {
