@@ -53,6 +53,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
     Route::post('/poin-penilaian', [Dashboard::class, 'add_poin_penilaian'])->name('add_poin_penilaian')->middleware('checkRole:admin,guru');
     Route::put('/poin-penilaian/{poin_id}', [Dashboard::class, 'edit_action_poin_penilaian'])->name('edit_action_poin_penilaian')->middleware('checkRole:admin,guru');
     Route::delete('/poin-penilaian/{poin_id}', [Dashboard::class, 'remove_poin_penilaian'])->name('remove_poin_penilaian')->middleware('checkRole:admin,guru');
+
+    Route::get('/nilai', [Dashboard::class, 'nilai'])->name('nilai')->middleware('checkRole:guru');
 });
 
 Route::group(['prefix' => 'auth'], function() {

@@ -29,6 +29,7 @@
                 </a>
             </li>
 
+            @if(Auth::user()->role === 'admin')
             <li class="nav-item">
                 <a class="nav-link text-white {{ Route::currentRouteName() === 'users' ? 'active bg-gradient-primary' : '' }}"
                     href="/dashboard/users">
@@ -39,11 +40,13 @@
                     <span class="nav-link-text ms-1">Data Akun</span>
                 </a>
             </li>
+            @endif
+            @if(Auth::user()->role === 'guru')
             <li class="nav-item">
                 <a class="nav-link text-white {{ Route::currentRouteName() === 'aspek' ? 'active bg-gradient-primary' : '' }}"
                     href="/dashboard/aspek">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">account_circle</i>
+                        <i class="material-icons opacity-10">post_add</i>
                     </div>
 
                     <span class="nav-link-text ms-1">Aspek</span>
@@ -53,12 +56,23 @@
                 <a class="nav-link text-white {{ Route::currentRouteName() === 'poin_penilaian' ? 'active bg-gradient-primary' : '' }}"
                     href="/dashboard/poin-penilaian">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">account_circle</i>
+                        <i class="material-icons opacity-10">checklist</i>
                     </div>
 
                     <span class="nav-link-text ms-1">Poin Penilaian</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ Route::currentRouteName() === 'nilai' ? 'active bg-gradient-primary' : '' }}"
+                    href="/dashboard/nilai">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">text_snippet</i>
+                    </div>
+
+                    <span class="nav-link-text ms-1">Penilaian Siswa</span>
+                </a>
+            </li>
+            @endif
 
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">

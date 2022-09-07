@@ -227,4 +227,12 @@ class Dashboard extends Controller
         PoinAspek::find($poin_id)->delete();
         return redirect('dashboard/poin-penilaian')->with('success', 'Berhasil menghapus data poin penilaian!');
     }
+
+    public function nilai() {
+        $siswa = Biodata::where('role', '=', 'siswa')
+            ->join('users', 'users.id', '=', 'biodata.user_id')
+            ->select('biodata.*', 'users.id', 'users.nama')
+            ->paginate(10);
+        return view('dashboard.nilai', ['all_siswa' => $siswa]);
+    }
 }
