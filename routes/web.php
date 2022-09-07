@@ -55,6 +55,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
     Route::delete('/poin-penilaian/{poin_id}', [Dashboard::class, 'remove_poin_penilaian'])->name('remove_poin_penilaian')->middleware('checkRole:admin,guru');
 
     Route::get('/nilai', [Dashboard::class, 'nilai'])->name('nilai')->middleware('checkRole:guru');
+    Route::get('/nilai/{user_id}', [Dashboard::class, 'nilai_detail'])->name('nilai_detail')->middleware('checkRole:guru');
 });
 
 Route::group(['prefix' => 'auth'], function() {

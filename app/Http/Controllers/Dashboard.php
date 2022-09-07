@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Biodata;
 use App\Models\Aspek;
 use App\Models\PoinAspek;
+use App\Models\Nilai;
 use Hash;
 use Carbon\Carbon;
 
@@ -234,5 +235,13 @@ class Dashboard extends Controller
             ->select('biodata.*', 'users.id', 'users.nama')
             ->paginate(10);
         return view('dashboard.nilai', ['all_siswa' => $siswa]);
+    }
+
+    public function nilai_detail($user_id) {
+        $nilai = Nilai::where('user_id', '=', $user_id)
+            ->join('poin_aspek', 'poin_aspek.id', '=', 'nilai_siswa.poin_id')
+            ->select('nilai_siswa.*', 'poin_aspek.nama_poin')
+            ->get();
+        return view('dashboard.nilai_detail', ['nilai' => $nilai]);
     }
 }
