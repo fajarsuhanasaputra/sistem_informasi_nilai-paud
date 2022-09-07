@@ -270,4 +270,9 @@ class Dashboard extends Controller
 
         return redirect('dashboard/nilai/'.$user_id)->with('success', 'Berhasil menambahkan data nilai!');
     }
+
+    public function remove_nilai($user_id, $nilai_id) {
+        Nilai::find($nilai_id)->delete();
+        return redirect('dashboard/nilai/'.$user_id)->with('success', 'Berhasil menghapus data nilai!');
+    }
 }

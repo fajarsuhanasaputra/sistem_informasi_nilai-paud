@@ -113,7 +113,8 @@
                                             <td>{{$item->nama_poin}}</td>
                                             <td>{{$item->nilai}}</td>
                                             <td>
-                                                <form action="" method="POST">
+                                                <form action="{{url('dashboard/nilai/'.$item->user_id.'/'.$item->id)}}"
+                                                    method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
