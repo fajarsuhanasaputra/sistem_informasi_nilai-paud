@@ -56,6 +56,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
 
     Route::get('/nilai', [Dashboard::class, 'nilai'])->name('nilai')->middleware('checkRole:guru');
     Route::get('/nilai/{user_id}', [Dashboard::class, 'nilai_detail'])->name('nilai_detail')->middleware('checkRole:guru');
+    Route::post('/nilai/{user_id}', [Dashboard::class, 'nilai_add'])->name('nilai.add')->middleware('checkRole:guru');
 });
 
 Route::group(['prefix' => 'auth'], function() {

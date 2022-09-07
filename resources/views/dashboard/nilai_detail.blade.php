@@ -83,9 +83,10 @@
                                     <h6 class="mb-0">Rapor Nilai Siswa</h6>
                                 </div>
                                 <div class="col-md-4 text-end">
-                                    <a href="" class="btn btn-primary">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#tambah_data">
                                         Tambah Data
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -103,14 +104,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @if(count($nilai) > 0)
+                                        @foreach($nilai as $item)
                                         <tr>
-                                            <td>Mark</td>
-                                            <td>Mark</td>
-                                            <td>Mark</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <td>{{$item->semester}}</td>
+                                            <td>{{$item->awal_ajaran}}/{{$item->akhir_ajaran}}</td>
+                                            <td>{{$item->nama_aspek}}</td>
+                                            <td>{{$item->nama_poin}}</td>
+                                            <td>{{$item->nilai}}</td>
+                                            <td>
+                                                <form action="" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="btn btn-sm btn-outline-danger">Hapus</button>
+                                                </form>
+                                            </td>
                                         </tr>
+                                        @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -131,4 +143,71 @@
     </div>
 </div>
 
+<div class="modal fade" id="tambah_data" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tambah_data">Rapor Penilaian</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{url('dashboard/nilai/'.request('user_id'))}}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-group input-group-static mb-4">
+                                <label for="semester" class="ms-0">Semester</label>
+                                <input min="1" type="number" name="semester" id="semester" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group input-group-static mb-4">
+                                <label for="awal_ajaran" class="ms-0">Awal Ajaran (tahun)</label>
+                                <input min="1900" max="2099" step="1" type="number" name="awal_ajaran" id="awal_ajaran"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group input-group-static mb-4">
+                                <label for="akhir_ajaran" class="ms-0">Akhir Ajaran (tahun)</label>
+                                <input min="1900" max="2099" step="1" type="number" name="akhir_ajaran"
+                                    id="akhir_ajaran" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="input-group input-group-static mb-4">
+                                <label for="poin" class="ms-0">Poin Aspek Penilaian</label>
+                                <select name="poin_id" class="form-control" id="poin" required>
+                                    <option value="">Pilih poin aspek yang akan dinilai</option>
+                                    @if(count($poins) > 0)
+                                    @foreach($poins as $poin)
+                                    <option value="{{$poin->id}}">
+                                        ({{$poin->nama_aspek}}) {{$poin->nama_poin}}
+                                    </option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="input-group input-group-static mb-4">
+                                <label for="nilai" class="ms-0">Nilai</label>
+                                <select name="nilai" class="form-control" id="nilai" required>
+                                    <option value="">Pilih nilai</option>
+                                    <option value="selalu">Selalu</option>
+                                    <option value="kadang">Kadang-kadang</option>
+                                    <option value="jarang">Jarang</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection

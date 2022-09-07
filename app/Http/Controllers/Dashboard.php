@@ -240,8 +240,34 @@ class Dashboard extends Controller
     public function nilai_detail($user_id) {
         $nilai = Nilai::where('user_id', '=', $user_id)
             ->join('poin_aspek', 'poin_aspek.id', '=', 'nilai_siswa.poin_id')
-            ->select('nilai_siswa.*', 'poin_aspek.nama_poin')
+            ->join('aspek', 'aspek.id', '=', 'poin_aspek.aspek_id')
+            ->select('nilai_siswa.*', 'poin_aspek.nama_poin', 'aspek.nama_aspek')
             ->get();
-        return view('dashboard.nilai_detail', ['nilai' => $nilai]);
+        $poins = PoinAspek::join('aspek', 'aspek.id', '=', 'poin_aspek.aspek_id')
+            ->select('poin_aspek.*', 'aspek.nama_aspek', 'aspek.kode')
+            ->get();
+
+        return view('dashboard.nilai_detail', ['nilai' => $nilai, 'poins' => $poins]);
+    }
+
+    public function nilai_add(Request $request, $user_id) {
+        $request->validate([
+            'semester',
+            'awal_ajaran',
+            'akhir_ajaran',
+            'poin_id',
+            'nilai'
+        ]);
+
+        Nilai::create([
+            'semester' => $request->semester,
+            'awal_ajaran' => $request->awal_ajaran,
+            'akhir_ajaran' => $request->akhir_ajaran,
+            'user_id' => $user_id,
+            'poin_id' => $request->poin_id,
+            'nilai' => $request->nilai,
+        ]);
+
+        return redirect('dashboard/nilai/'.$user_id)->with('success', 'Berhasil menambahkan data nilai!');
     }
 }
