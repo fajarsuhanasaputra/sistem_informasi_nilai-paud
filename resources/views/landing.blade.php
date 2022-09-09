@@ -15,7 +15,7 @@
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 
-        <a href="{{ route('login') }}" class="get-started-btn">Masuk</a>
+        <a href="{{ route('login') }}" class="get-started-btn">{{Auth::check() ? 'Dashboard' : 'Masuk'}}</a>
     </div>
 </header><!-- End Header -->
 

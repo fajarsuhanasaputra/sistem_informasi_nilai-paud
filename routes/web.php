@@ -58,6 +58,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
     Route::get('/nilai/{user_id}', [Dashboard::class, 'nilai_detail'])->name('nilai_detail')->middleware('checkRole:guru');
     Route::post('/nilai/{user_id}', [Dashboard::class, 'nilai_add'])->name('nilai.add')->middleware('checkRole:guru');
     Route::delete('/nilai/{user_id}/{nilai_id}', [Dashboard::class, 'remove_nilai'])->name('nilai.remove')->middleware('checkRole:guru');
+
+    Route::get('/profile/{user_id}', [Dashboard::class, 'profile'])->name('profile');
+    Route::put('/profile/{user_id}/{biodata_id}', [Dashboard::class, 'profile_update'])->name('profile.update');
 });
 
 Route::group(['prefix' => 'auth'], function() {

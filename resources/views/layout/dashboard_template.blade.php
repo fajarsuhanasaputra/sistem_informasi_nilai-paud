@@ -81,7 +81,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white" href="./profile.html">
+                <a class="nav-link text-white {{ Route::currentRouteName() === 'profile' ? 'active bg-gradient-primary' : '' }}"
+                    href="{{url('/dashboard/profile/'.Auth::user()->id)}}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">person</i>
                     </div>

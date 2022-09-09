@@ -275,4 +275,44 @@ class Dashboard extends Controller
         Nilai::find($nilai_id)->delete();
         return redirect('dashboard/nilai/'.$user_id)->with('success', 'Berhasil menghapus data nilai!');
     }
+
+    public function profile($user_id) {
+        $biodata = Biodata::where('user_id', '=', $user_id)
+            ->join('users', 'users.id', '=', 'biodata.user_id')
+            ->get();
+        return view('dashboard.profile', ['biodata' => $biodata[0]]);
+    }
+
+    public function profile_update(Request $request, $user_id, $biodata_id) {
+        $user = User::find($user_id);
+        $biodata = Biodata::find($user_id);
+
+        $user->nama = $request->nama;
+        $user->update();
+
+
+        if($request->has('poto')) {
+            if($this->remove_photo($biodata->poto)){
+                $newPhoto = $this->save_photo($request);
+                $biodata->poto = $newPhoto;
+            }
+        }
+        
+        if($request->has('nip')) {
+            $biodata->nip = $request->nip;
+        }
+
+        if($request->has('nisn')) {
+            $biodata->nisn = $request->nisn;
+        }
+
+        $biodata->tempat_lahir = $request->tempat_lahir;
+        $biodata->tanggal_lahir = $request->tanggal_lahir;
+        $biodata->jenis_kelamin = $request->jenis_kelamin;
+        $biodata->agama = $request->agama;
+        $biodata->alamat = $request->alamat;
+        $biodata->update();
+
+        return redirect('dashboard/profile/'.$user_id)->with('success', 'Profile berhasil diperbaharui!');
+    }
 }
