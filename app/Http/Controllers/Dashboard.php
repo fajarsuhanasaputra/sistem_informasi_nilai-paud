@@ -23,12 +23,24 @@ class Dashboard extends Controller
                 ->join('poin_aspek', 'poin_aspek.id', '=', 'nilai_siswa.poin_id')
                 ->join('aspek', 'aspek.id', '=', 'poin_aspek.aspek_id')
                 ->select('nilai_siswa.*', 'poin_aspek.nama_poin', 'aspek.nama_aspek')
-                ->get();
+                ->paginate(10);
 
             return view('dashboard.index', ['nilai' => $nilai]);
         }
 
-        return view('dashboard.index');
+        $total_siswa = User::where('role', '=', 'siswa')->count();
+        $total_guru = User::where('role', '=', 'guru')->count();
+        $kelas_a = Biodata::where('kelas', '=', 'A')->count();
+        $kelas_b = Biodata::where('kelas', '=', 'B')->count();
+        $total_aspek = Aspek::count();
+
+        return view('dashboard.index', [
+            'total_siswa' => $total_siswa,
+            'total_guru' => $total_guru,
+            'total_aspek' => $total_aspek,
+            'kelas_a' => $kelas_a,
+            'kelas_b' => $kelas_b,
+        ]);
     }
 
     public function users() {
