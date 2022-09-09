@@ -112,23 +112,25 @@
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group input-group-outline">
-                        <label class="form-label">Type here...</label>
-                        <input type="text" class="form-control" />
+                    <div class="navbar-nav justify-content-end dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle mt-2" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-user me-sm-1"></i>
+                            {{Auth::user()->nama}}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <form action="{{ route('logout.action') }}" method="POST">
+                                    @csrf
+                                    <button class="btn" type="submit">
+                                        <i class="fa fa-light fa-right-from-bracket"></i>
+                                        <span class="d-sm-inline d-none">Keluar</span>
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <ul class="navbar-nav justify-content-end">
-                    <li class="nav-item d-flex align-items-center mt-3">
-                        <form action="{{ route('logout.action') }}" method="POST">
-                            @csrf
-                            <button class="btn btn-warning" type="submit"
-                                class="nav-link text-body font-weight-bold px-0">
-                                <i class="fa fa-light fa-right-from-bracket"></i>
-                                <span class="d-sm-inline d-none">Keluar</span>
-                            </button>
-                        </form>
-                    </li>
-                </ul>
             </div>
         </div>
     </nav>

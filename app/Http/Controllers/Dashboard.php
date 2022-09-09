@@ -11,10 +11,23 @@ use App\Models\PoinAspek;
 use App\Models\Nilai;
 use Hash;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class Dashboard extends Controller
 {
     public function index(){
+        if(Auth::check() && Auth::user()->role === 'siswa') {
+            $user_id = Auth::user()->id;
+
+            $nilai = Nilai::where('user_id', '=', $user_id)
+                ->join('poin_aspek', 'poin_aspek.id', '=', 'nilai_siswa.poin_id')
+                ->join('aspek', 'aspek.id', '=', 'poin_aspek.aspek_id')
+                ->select('nilai_siswa.*', 'poin_aspek.nama_poin', 'aspek.nama_aspek')
+                ->get();
+
+            return view('dashboard.index', ['nilai' => $nilai]);
+        }
+
         return view('dashboard.index');
     }
 
