@@ -344,4 +344,18 @@ class Dashboard extends Controller
 
         return redirect('dashboard/profile/'.$user_id)->with('success', 'Profile berhasil diperbaharui!');
     }
+
+    public function print($user_id) {
+        $nilai = Nilai::where('user_id', '=', $user_id)
+            ->join('poin_aspek', 'poin_aspek.id', '=', 'nilai_siswa.poin_id')
+            ->join('aspek', 'aspek.id', '=', 'poin_aspek.aspek_id')
+            ->select('nilai_siswa.*', 'poin_aspek.nama_poin', 'aspek.nama_aspek')
+            ->get();
+
+        $biodata = Biodata::where('user_id', '=', $user_id)
+            ->join('users', 'users.id', '=', 'biodata.user_id')
+            ->get();
+        
+        return view('dashboard.print', ['nilai' => $nilai, 'biodata' => $biodata[0]]);
+    }
 }

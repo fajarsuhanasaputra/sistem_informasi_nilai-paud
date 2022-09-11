@@ -96,6 +96,10 @@
         </div>
     </div>
     <div class="card-body px-4 pb-2">
+        <a target="_blank" href="dashboard/print/{{Auth::user()->id}}" class="btn btn-outline-info">
+            <i class="fa-solid fa-print"></i>
+            Print
+        </a>
         <div class="table-responsive p-0">
             <div class="table-responsive">
                 <table class="table table-striped table-hover table-bordered">
