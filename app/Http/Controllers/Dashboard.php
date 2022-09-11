@@ -255,7 +255,11 @@ class Dashboard extends Controller
     }
 
     public function nilai() {
+        $guru_id = Auth::user()->id;
+        $guru = Biodata::find($guru_id);
+        
         $siswa = Biodata::where('role', '=', 'siswa')
+            ->where('kelas', '=', $guru->kelas)
             ->join('users', 'users.id', '=', 'biodata.user_id')
             ->select('biodata.*', 'users.id', 'users.nama')
             ->paginate(10);

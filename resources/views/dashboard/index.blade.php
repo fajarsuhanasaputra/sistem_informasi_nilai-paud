@@ -92,7 +92,7 @@
 <div class="card my-5">
     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-            <h6 class="text-white text-capitalize ps-3">Rapor Nilai Mahasiswa</h6>
+            <h6 class="text-white text-capitalize ps-3">Perkembangan Siswa</h6>
         </div>
     </div>
     <div class="card-body px-4 pb-2">
@@ -116,7 +116,8 @@
                             <td>{{$item->awal_ajaran}}/{{$item->akhir_ajaran}}</td>
                             <td>{{$item->nama_aspek}}</td>
                             <td>{{$item->nama_poin}}</td>
-                            <td>{{$item->nilai}}</td>
+                            <td>{{$item->nilai === "mb" ? 'Mulai Berkembang' : ($item->nilai === 'bsh' ? 'Berkembang Sesuai Harapan' : ($item->nilai === 'bsb' ? 'Berkembang Sangat Baik' : '-'))}}
+                            </td>
                         </tr>
                         @endforeach
                         @endif

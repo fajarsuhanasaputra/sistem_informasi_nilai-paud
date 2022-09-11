@@ -15,7 +15,7 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-md-8 d-flex align-items-center">
-                                    <h6 class="mb-0">Rapor Nilai Siswa</h6>
+                                    <h6 class="mb-0">Perkembangan Siswa</h6>
                                 </div>
                                 <div class="col-md-4 text-end">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -46,7 +46,8 @@
                                             <td>{{$item->awal_ajaran}}/{{$item->akhir_ajaran}}</td>
                                             <td>{{$item->nama_aspek}}</td>
                                             <td>{{$item->nama_poin}}</td>
-                                            <td>{{$item->nilai}}</td>
+                                            <td>{{$item->nilai === "mb" ? 'Mulai Berkembang' : ($item->nilai === 'bsh' ? 'Berkembang Sesuai Harapan' : ($item->nilai === 'bsb' ? 'Berkembang Sangat Baik' : '-'))}}
+                                            </td>
                                             <td>
                                                 <form action="{{url('dashboard/nilai/'.$item->user_id.'/'.$item->id)}}"
                                                     method="POST">
@@ -74,7 +75,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="tambah_data">Rapor Penilaian</h5>
+                <h5 class="modal-title" id="tambah_data">Perkembangan Siswa</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{url('dashboard/nilai/'.request('user_id'))}}" method="POST">
@@ -121,9 +122,9 @@
                                 <label for="nilai" class="ms-0">Nilai</label>
                                 <select name="nilai" class="form-control" id="nilai" required>
                                     <option value="">Pilih nilai</option>
-                                    <option value="selalu">Selalu</option>
-                                    <option value="kadang">Kadang-kadang</option>
-                                    <option value="jarang">Jarang</option>
+                                    <option value="mb">MB(Mulai Berkembang)</option>
+                                    <option value="bsh">BSH(Berkembang Sesuai Harapan)</option>
+                                    <option value="bsb">BSB(Berkembang Sangat Baik)</option>
                                 </select>
                             </div>
                         </div>
