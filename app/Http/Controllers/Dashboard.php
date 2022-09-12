@@ -12,6 +12,7 @@ use App\Models\Nilai;
 use Hash;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class Dashboard extends Controller
 {
@@ -352,10 +353,14 @@ class Dashboard extends Controller
             ->select('nilai_siswa.*', 'poin_aspek.nama_poin', 'aspek.nama_aspek')
             ->get();
 
-        $biodata = Biodata::where('user_id', '=', $user_id)
+        $biodatas = Biodata::where('user_id', '=', $user_id)
             ->join('users', 'users.id', '=', 'biodata.user_id')
             ->get();
-        
-        return view('dashboard.print', ['nilai' => $nilai, 'biodata' => $biodata[0]]);
+        $biodata = $biodatas[0];
+            
+        // return view('dashboard.print', ['nilai' => $nilai, 'biodata' => $biodata]);
+
+        $pdf = PDF::loadView('dashboard.print', compact('nilai', 'biodata'));
+        return $pdf->stream('Rapor Penilaian-'.$biodata->id.'-'.$biodata->nama.'.pdf');
     }
 }
