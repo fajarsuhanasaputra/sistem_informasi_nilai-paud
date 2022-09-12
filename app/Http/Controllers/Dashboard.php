@@ -101,13 +101,9 @@ class Dashboard extends Controller
     }
 
     public function save_photo($request) {
-        $date = Carbon::now()->format('H:i:m');
-        $str = $this->quickRandom();
-        $ext = $request->poto->extension();
-        $name = $str.'-'.$date.'.'.$ext;
-        $request->poto->storeAs('images', $name);
-
-        return $name;
+        $imageName = time().'.'.$request->poto->extension();  
+        $request->poto->move(public_path('/storage/images'), $imageName);
+        return $imageName;
     }
 
     public function remove_photo($photo) {
@@ -148,9 +144,12 @@ class Dashboard extends Controller
         $user->update();
 
         if($request->has('poto')) {
+            $request->validate([
+                'poto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
             $this->remove_photo($biodata->poto);
-            $newPhoto = $this->save_photo($request);
-            $biodata->poto = $newPhoto;
+            $imageName = $this->save_photo($request);
+            $biodata->poto = $imageName;
         }
 
         $biodata->nip = $request->nip;
@@ -321,9 +320,12 @@ class Dashboard extends Controller
 
 
         if($request->has('poto')) {
+            $request->validate([
+                'poto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
             $this->remove_photo($biodata->poto);
-            $newPhoto = $this->save_photo($request);
-            $biodata->poto = $newPhoto;
+            $imageName = $this->save_photo($request);
+            $biodata->poto = $imageName;
         }
         
         if($request->has('nip')) {
@@ -355,9 +357,6 @@ class Dashboard extends Controller
             ->join('users', 'users.id', '=', 'biodata.user_id')
             ->get();
         $biodata = $biodatas[0];
-            
-        // return view('dashboard.print', ['nilai' => $nilai, 'biodata' => $biodata]);
-
         $pdf = PDF::loadView('dashboard.print', compact('nilai', 'biodata'));
         return $pdf->stream('Rapor Penilaian-'.$biodata->id.'-'.$biodata->nama.'.pdf');
     }
