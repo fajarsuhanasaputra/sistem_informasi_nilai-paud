@@ -148,10 +148,9 @@ class Dashboard extends Controller
         $user->update();
 
         if($request->has('poto')) {
-            if($this->remove_photo($biodata->poto)){
-                $newPhoto = $this->save_photo($request);
-                $biodata->poto = $newPhoto;
-            }
+            $this->remove_photo($biodata->poto);
+            $newPhoto = $this->save_photo($request);
+            $biodata->poto = $newPhoto;
         }
 
         $biodata->nip = $request->nip;
@@ -322,10 +321,9 @@ class Dashboard extends Controller
 
 
         if($request->has('poto')) {
-            if($this->remove_photo($biodata->poto)){
-                $newPhoto = $this->save_photo($request);
-                $biodata->poto = $newPhoto;
-            }
+            $this->remove_photo($biodata->poto);
+            $newPhoto = $this->save_photo($request);
+            $biodata->poto = $newPhoto;
         }
         
         if($request->has('nip')) {
